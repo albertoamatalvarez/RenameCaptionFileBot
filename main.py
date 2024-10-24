@@ -1,4 +1,5 @@
 from decouple import config
+from telegram import Update
 from telegram.ext import ApplicationBuilder, MessageHandler, filters, CommandHandler
 
 from handler.handler import start, handle_video
@@ -14,4 +15,4 @@ if __name__ == '__main__':
     # Añadimos el manejador para archivos de tipo video
     app.add_handler(MessageHandler(filters.VIDEO, handle_video))
     # Iniciamos el bot
-    app.run_polling()
+    app.run_polling(allowed_updates=Update.ALL_TYPES)
