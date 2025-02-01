@@ -19,7 +19,9 @@ async def start(update, context):
 # Función que maneja los archivos recibidos
 async def handle_video(update, context):
     video = update.message.video
-    # filename can contain special characters like '_'. Replace them with ' ' in all cases
     file_name = splitext(video.file_name)[0].replace('_', ' ') if video.file_name else 'Sin nombre'
     logger.info("Received video %s from user %s", file_name, update.effective_user["username"])
+    await update.message.delete()
     await update.message.reply_video(video.file_id, caption=file_name)
+
+
